@@ -4,7 +4,7 @@ from math import pi
 class TypeCheck:
     required_type = object
 
-    def __init__(self, name):
+    def __init__(self, name=None):
         self.name = f'_{name}'
 
     def __get__(self, instance, owner=None):
@@ -17,9 +17,18 @@ class TypeCheck:
 class IntType(TypeCheck):
     required_type = int
 
+
+def type_check(cls):
+    for variable_name, checker in cls.__dict__.items():
+        if isinstance(checker, TypeCheck):
+            checker.name = f'_{variable_name}'
+    return cls
+
+
+@type_check
 class Point:
-    x = IntType('x')
-    y = IntType('y')
+    x = IntType()
+    y = IntType()
 
     def __init__(self, x, y):
         self.x = x
@@ -41,8 +50,8 @@ class PointType(TypeCheck):
 
 
 class Circle:
-    radius = IntType('radius')
-    center = PointType('center')
+    radius = IntType()
+    center = PointType()
     def __init__(self, center, radius):
         self.center = center
         self.radius = radius
