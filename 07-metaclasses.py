@@ -31,7 +31,7 @@ class TypeCheckMeta(type):
         return type_check(cls)
 
 
-class Base(metaclass=TypeCheckMeta):
+class Base():
     __annotations__ = {}
 
 
