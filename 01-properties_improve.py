@@ -14,16 +14,19 @@ class TypeCheck:
         assert isinstance(value, self.required_type), f'Booo, expecting an {self.required_type.__name__}'
         instance.__dict__[self.name] = value
 
+class IntType(TypeCheck):
+    required_type = int
 
-def type_check(cls):
-    for variable_name, variable_type in cls.__annotations__.items():
-        class Checker(TypeCheck):
-            required_type = variable_type
-        setattr(cls, variable_name, Checker(variable_name))
-    return cls
+def type_check(**kwargs):
+    def wrapper(cls):
+        for variable_name, checker_cls in kwargs.items():
+            checker =  checker_cls(variable_name)
+            setattr(cls, variable_name, checker)
+            return cls
+    return wrapper
 
 
-@type_check
+@type_check(x=IntType, y=IntType)
 class Point:
     x: int
     y: int
@@ -43,7 +46,7 @@ class Point:
         return f'{self.__class__.__name__}({self.x}, {self.y})'
 
 
-@type_check
+@type_check()
 class Circle:
     radius: int
     center: Point
@@ -63,8 +66,4 @@ class Circle:
         return f'{self.__class__.__name__}({self.center!r}, {self.radius!r})'
 
 
-if __name__ == '__main__':
-    pass
-    p = Point(1,2)
-    p.__class__.__dict__['x'].__get__(p) == p.x
 
