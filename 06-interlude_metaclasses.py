@@ -2,11 +2,13 @@ class Meta(type):
     def __new__(meta, name, bases, dct):
         result = super().__new__(meta, name, bases, dct)
         print(f'Called: __new__({meta}, {name}, {bases}, {dct} -> {result}')
+        print('super new')
         return result
 
     def __init__(cls, name, bases, dct):
         result = super().__init__(name, bases, dct)
         print(f'Called: __init__({cls}, {name}, {bases}, {dct} -> {result}')
+        print('new')
         return result
 
 
@@ -14,7 +16,7 @@ class Point(object, metaclass=Meta):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-
+        print('old')
     def move_by(self, dx, dy):
         self.x += dx
         self.y += dy
