@@ -8,3 +8,12 @@ type ('Foo', (), {}) is same as
 class Foo()
 
 meta class is called at the class definition
+
+
+@type_check
+class Point(Base):
+[...]
+
+same as 
+
+Point = type_check(Point)
