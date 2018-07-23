@@ -19,9 +19,10 @@ class IntType(TypeCheck):
 
 
 def type_check(cls):
-    for variable_name, checker in cls.__dict__.items():
-        if isinstance(checker, TypeCheck):
-            checker.name = f'_{variable_name}'
+    for variable_name, variable_type in cls.__annotations__.items():
+        class Checker(TypeCheck):
+            required_type = variable_type
+        setattr(cls, variable_name, Checker(variable_name))
     return cls
 
 
