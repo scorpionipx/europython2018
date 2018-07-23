@@ -10,7 +10,7 @@ class Meta(type):
         return result
 
 
-class Point(object, metaclass=Meta):
+class Point(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
