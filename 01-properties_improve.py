@@ -27,8 +27,8 @@ def type_check(cls):
 
 @type_check
 class Point:
-    x = IntType()
-    y = IntType()
+    x: int
+    y: int
 
     def __init__(self, x, y):
         self.x = x
@@ -50,8 +50,8 @@ class PointType(TypeCheck):
 
 
 class Circle:
-    radius = IntType()
-    center = PointType()
+    radius: int
+    center: Point
     def __init__(self, center, radius):
         self.center = center
         self.radius = radius
