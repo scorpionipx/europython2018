@@ -7,3 +7,4 @@ python -i file to import
 type ('Foo', (), {}) is same as 
 class Foo()
 
+meta class is called at the class definition

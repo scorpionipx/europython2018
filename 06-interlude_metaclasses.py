@@ -10,7 +10,7 @@ class Meta(type):
         return result
 
 
-class Point(object):
+class Point(object, metaclass=Meta):
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -24,3 +24,7 @@ class Point(object):
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self.x}, {self.y})'
+
+
+p = Point(1, 2)
+print(p)
