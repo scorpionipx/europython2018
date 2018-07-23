@@ -1,0 +1,9 @@
+europython 
+python -i file to import
+
+@property
+@prop.setter
+
+type ('Foo', (), {}) is same as 
+class Foo()
+
